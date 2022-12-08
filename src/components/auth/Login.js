@@ -19,6 +19,7 @@ export const Login = () => {
             "capstone_user",
             JSON.stringify({
               id: user.id,
+              staff: user.isStaff
             })
           );
 
@@ -33,7 +34,7 @@ export const Login = () => {
     <main className="container--login">
       <section>
         <form className="form--login" onSubmit={handleLogin}>
-          <h1>Project Name</h1>
+          <h1>Mobile Suite</h1>
           <h2>Please sign in</h2>
           <fieldset>
             <label htmlFor="inputEmail"> Email address </label>

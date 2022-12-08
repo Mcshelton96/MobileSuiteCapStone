@@ -1,10 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import { Authorized } from "./views/Authorized";
 import { ApplicationViews } from "./views/ApplicationViews";
+import { NavBar } from "./nav/NavBar"
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 
-export const CapstoneTemplate = () => {
+export const MobileSuite = () => {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
@@ -15,6 +16,7 @@ export const CapstoneTemplate = () => {
         element={
           <Authorized>
             <>
+              <NavBar />
               <ApplicationViews />
             </>
           </Authorized>
