@@ -1,15 +1,16 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import {UploadAndDisplayImage} from "./ImageUpload"
 
-export const ProductForm = () => {
+export const PostForm = () => {
     /*
         TODO: Add the correct default properties to the
         initial state object
     */
-    const [product, update] = useState({
-        name: "",
-        price: 0,
-        type: ""
+    const [post, update] = useState({
+        description: "",
+        Date: 0,
+        Image: ""
     })
     /*
         TODO: Use the useNavigation() hook so you can redirect
@@ -26,40 +27,39 @@ export const ProductForm = () => {
         console.log("button clicked")
 
         // TODO: Create the object to be saved to the API
-        const productToSendToAPI = {
+        const postToSendToAPI = {
             userId: capstoneUserObject.id,
-            name: product.name,
-            price: product.price,
-            type: product.type
+            description: post.description,
+            Date: post.date
            }
 
         // TODO: Perform the fetch() to POST the object to the API
-        return fetch (`http://localhost:8088/products`, {
+        return fetch (`http://localhost:8088/posts`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(productToSendToAPI)
+            body: JSON.stringify(postToSendToAPI)
         } )
             .then(resonse => resonse.json())
             .then(() => {
-                navigate("/products")
+                navigate("/posts")
             })
         
     }
 
     return (
-        <form className="productForm">
-            <h2 className="productForm__title">New Product</h2>
+        <form className="postForm">
+            <h2 className="postForm__title">New Post</h2>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="name">Name:</label>
+                    <label htmlFor="name">Description:</label>
                     <input
                         required autoFocus
                         type="text"
                         className="form-control"
-                        placeholder="Name of Product"
-                        value={product.name}
+                        placeholder="Post Description"
+                        value={post.description}
                         onChange={
                             (evt) => {
                                 const copy = { ...product }
@@ -69,43 +69,27 @@ export const ProductForm = () => {
                         } />
                 </div>
             </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="price">Price:</label>
-                    <input
-                        required autoFocus
-                        type="text"
-                        className="form-control"
-                        placeholder="Price of Product"
-                        value={product.price}
-                        onChange={
-                            (evt) => {
-                                const copy = { ...product }
-                                copy.price = evt.target.value
-                                update(copy)
-                            }
-                        } />
-                </div>
-            </fieldset>
-
+            {/* <fieldset>
+                                    add image section here
+            </fieldset> */}
             <fieldset>
                 <div className="form-group">
                     <label>
-                        Select Product Type
-                        <select value={product.type.value} onChange={product.handleChange}>
-                            <option value="kit">Kit</option>
-                            <option value="tool">Tool</option>
-                            <option value="paint">Paint</option>
+                        Select Tag for Post
+                        <select value={post.tag.value} onChange={post.handleChange}>
+                            <option value="beginner">Beginner</option>
+                            <option value="help">Help</option>
+                            <option value="discussion">Discussion</option>
                         </select>
                     </label>
                     <input
                         required autoFocus
                         type="submit"
-                        value={product.type}
+                        value={post.tag}
                         onChange={
                             (evt) => {
-                                const copy = { ...product }
-                                copy.type = evt.target.value
+                                const copy = { ...post }
+                                copy.tag = evt.target.value
                                 update(copy)
                             }
                         } />
@@ -113,7 +97,7 @@ export const ProductForm = () => {
             </fieldset>
             <button onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                 className="btn btn-primary">
-                Add New Product
+                Add New Post
             </button>
         </form>
     )

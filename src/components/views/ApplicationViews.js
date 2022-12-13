@@ -18,6 +18,9 @@ export const ApplicationViews = () => {
 
                 <Route path="product/add" element={ <ProductForm /> } />
 
+                <Route path="posts/add" element={ <PostForm /> } />
+
+
             </Route>
         </Routes>
     )
