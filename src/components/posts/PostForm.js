@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import {UploadAndDisplayImage} from "./ImageUpload"
+// import {UploadAndDisplayImage} from "./ImageUpload"
 
 export const PostForm = () => {
     /*
@@ -9,8 +9,9 @@ export const PostForm = () => {
     */
     const [post, update] = useState({
         description: "",
-        Date: 0,
-        Image: ""
+        tag: "",
+        date: 0,
+        image: ""
     })
     /*
         TODO: Use the useNavigation() hook so you can redirect
@@ -41,7 +42,7 @@ export const PostForm = () => {
             },
             body: JSON.stringify(postToSendToAPI)
         } )
-            .then(resonse => resonse.json())
+            .then(response => response.json())
             .then(() => {
                 navigate("/posts")
             })
@@ -62,7 +63,7 @@ export const PostForm = () => {
                         value={post.description}
                         onChange={
                             (evt) => {
-                                const copy = { ...product }
+                                const copy = { ...post }
                                 copy.name = evt.target.value
                                 update(copy)
                             }

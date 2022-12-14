@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "./Products.css"
 
 export const ProductList = () => {
@@ -54,23 +54,26 @@ export const ProductList = () => {
         {
             capstoneUserObject.staff
                 ? <>
-                    <button onClick={() => navigate("/product/add")}>Add New Product</button>
-                    <button onClick={() => { setFavorites(false) }}>Products</button>
-                </> 
+                    <button onClick={() => navigate("/products/add")}>Add New Product</button>
+                </>
                 : <>
                     <button onClick={() => { setFavorites(true) }}>My Favorites</button>
                     <button onClick={() => { setFavorites(false) }}>Products</button>
                 </>
         }
 
-        <h2>Shop</h2>
+        <h2>Products</h2>
 
         <article className="products">
             {
                 products.map(
                     (product) => {
                         return <section key={product.id} className="product">
-                            <header>{product.name}</header>
+                            <header>
+                                <Link to={`/products/${product.name}/edit`}>Edit: {product.name}</Link>
+                            </header>
+                            <footer>{product.name}</footer>
+                            <footer>{product.grade}</footer>
                             <footer>${product.price}</footer>
                         </section>
                     }
