@@ -38,7 +38,7 @@ export const ProductEdit = () => {
 
     return (
         <form className="productForm">
-            <h2 className="productForm__title">New Product</h2>
+            <h2 className="productForm__title">Edit Product</h2>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="name">Name:</label>
@@ -88,7 +88,7 @@ export const ProductEdit = () => {
                             <option value="HG">HG</option>
                             <option value="RG">RG</option>
                             <option value="MG">MG</option>
-                            <option value="n/a">N/A</option>
+                            <option value="">"N/A"</option>
                         </select>
                     </label>
                 </div>
@@ -112,7 +112,7 @@ export const ProductEdit = () => {
             </fieldset>
             <button onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
                 className="btn btn-primary">
-                Add New Product
+                Save Edit
             </button>
         </form>
     )

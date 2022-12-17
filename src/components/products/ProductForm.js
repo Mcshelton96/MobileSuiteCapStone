@@ -103,7 +103,7 @@ export const ProductForm = () => {
                             <option value="HG">HG</option>
                             <option value="RG">RG</option>
                             <option value="MG">MG</option>
-                            <option value="n/a">N/A</option>
+                            <option value="">N/A</option>
                         </select>
                     </label>
                 </div>
