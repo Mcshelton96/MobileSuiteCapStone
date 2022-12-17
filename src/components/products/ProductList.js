@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { Product } from "./Product"
 import "./Products.css"
 
 export const ProductList = () => {
@@ -11,8 +12,20 @@ export const ProductList = () => {
     const localCapStoneUser = localStorage.getItem("capstone_user")
     const capstoneUserObject = JSON.parse(localCapStoneUser)
 
+    const getAllProducts = () => {
+        fetch(`http://localhost:8088/products`)
+                .then(response => response.json())
+                .then((productArray) => {
+                    setProducts(productArray)
+                })
+    }
+    
+
     useEffect(
         () => {
+
+            getAllProducts()
+
             fetch(`http://localhost:8088/products`)
                 .then(response => response.json())
                 .then((productArray) => {
@@ -67,16 +80,21 @@ export const ProductList = () => {
         <article className="products">
             {
                 products.map(
-                    (product) => {
-                        return <section key={product.id} className="product">
-                            <header>
-                                <Link to={`/products/${product.name}/edit`}>Edit: {product.name}</Link>
-                            </header>
-                            <footer>{product.name}</footer>
-                            <footer>{product.grade}</footer>
-                            <footer>${product.price}</footer>
-                        </section>
-                    }
+                    (product) => <Product currentUser={capstoneUserObject} 
+                    const getAllProducts={getAllProducts}
+                    productObject={product} />
+                        
+                        
+                        
+                        // return <section key={product.id} className="product">
+                        //     <header>
+                        //         <Link to={`/products/${product.name}/edit`}>Edit: {product.name}</Link>
+                        //     </header>
+                        //     <footer>{product.name}</footer>
+                        //     <footer>{product.grade}</footer>
+                        //     <footer>${product.price}</footer>
+                        // </section>
+                    
                 )
             }
         </article>
